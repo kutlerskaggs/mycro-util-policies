@@ -1,0 +1,13 @@
+{
+    "node": true,
+    "esnext": true,
+    "predef": [
+        "after",
+        "before",
+        "context",
+        "describe",
+        "it",
+        "mycro",
+        "request"
+    ]
+}
