@@ -15,6 +15,10 @@
   ],
   "author": "chris ludden",
   "license": "MIT",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/kutlerskaggs/mycro-util-policies"
+  },
   "dependencies": {
     "async": "^1.5.2",
     "include-all": "^0.1.6",
