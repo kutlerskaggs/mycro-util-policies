@@ -12,16 +12,79 @@ module.exports = function(mycro) {
                 policies: [
                     mycro.policies.if(
                         mycro.policies.validate('query', function(joi) {
-
-                        }),
+                            return joi.object({
+                                first: joi.string().required()
+                            }).required();
+                        }, {allowUnknown: true}),
                         mycro.policies.validate('query', function(joi) {
-
-                        }),
+                            return joi.object({
+                                last: joi.string().min(3).required()
+                            }).required();
+                        }, {allowUnknown: true}),
                         mycro.policies.validate('query', function(joi) {
-                            
-                        })
+                            return joi.object({
+                                age: joi.number().integer().min(18).required()
+                            }).required();
+                        }, {allowUnknown: true})
                     )
-                ]
+                ],
+                get: 'test.success',
+                '/missing': {
+                    '/fail': {
+                        policies: [
+                            mycro.policies.if(
+                                function(req, res, next) {
+                                    return next(false);
+                                },
+                                function(req, res, next) {
+                                    return next();
+                                }
+                            )
+                        ],
+                        get: 'test.success'
+                    },
+                    '/pass': {
+                        policies: [
+                            mycro.policies.if(
+                                function(req, res, next) {
+                                    return next();
+                                },
+                                'unknown',
+                                'authenticated'
+                            )
+                        ],
+                        get: 'test.success'
+                    },
+                    '/test': {
+                        policies: [
+                            mycro.policies.if(
+                                'unknown',
+                                function(req, res, next) {
+                                    return next(false);
+                                },
+                                function(req, res, next) {
+                                    res.json(500);
+                                    return next(false);
+                                }
+                            )
+                        ],
+                        get: 'test.success'
+                    }
+                }
+            },
+            '/not': {
+                '/one': {
+                    policies: [
+                        mycro.policies.not(
+                            mycro.policies.validate('query', function(joi) {
+                                return joi.object({
+                                    name: joi.string().required()
+                                }).required();
+                            })
+                        )
+                    ],
+                    get: 'test.success'
+                }
             },
             '/or': {
                 policies: [
