@@ -1,6 +1,6 @@
 {
   "name": "mycro-util-policies",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "common policies for mycro apps",
   "main": "index.js",
   "scripts": {
