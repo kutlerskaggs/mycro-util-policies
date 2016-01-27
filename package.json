@@ -1,6 +1,6 @@
 {
   "name": "mycro-util-policies",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "common policies for mycro apps",
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,8 @@
   "author": "chris ludden",
   "license": "MIT",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/kutlerskaggs/mycro-util-policies"
+    "type": "git",
+    "url": "https://github.com/kutlerskaggs/mycro-util-policies"
   },
   "dependencies": {
     "async": "^1.5.2",
