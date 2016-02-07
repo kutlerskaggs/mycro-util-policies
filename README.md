@@ -52,6 +52,10 @@ module.exports = function(mycro) {
 Inverts the outcome of a policy.
 ###### Arguments
 1. **policy** *(string|function)* - the policy to invert
+2. [**options**] *(object)*  - options  
+3. [**options.error**] *(object)* - custom error options
+4. [**options.error.status**] *(number)* - custom error response status (defaults to 400)
+5. [**options.error.error**] *(string|object)* - custom error response error
 
 ```javascript
 // in app/routes.js
@@ -78,6 +82,9 @@ Tests multiple policies, until one passes, in which case the policy passes. Othe
 1. **policies** *(...string|function)* - one or more policies to test
 2. [**options**] *(object)*  - options  
 3. [**options.handleError**] *(function)*  - error handler policy (req, res, next)
+4. [**options.error**] *(object)* - custom error options
+5. [**options.error.status**] *(number)* - custom error response status (defaults to 403)
+6. [**options.error.error**] *(string|object)* - custom error response error (defaults to 'Forbidden')
 
 ```javascript
 // in app/routes.js
@@ -104,6 +111,9 @@ Validate the request using [joi](https://github.com/hapijs/joi), returns 401 if 
 1. [**container**] *(string)* - the part of the request to validate (body, cookies, headers, query). if no container is specified, the entire request is validated. The validated attributes are then merged into the request object.
 2. **factoryFn** *(function)* - a function that receives a `joi` instance and returns a valid `joi` schema.
 3. [**options**] *(object)* - `joi` validation options
+4. [**options.error**] *(object)* - custom error options
+5. [**options.error.status**] *(number)* - custom error response status (defaults to 400)
+6. [**options.error.error**] *(string|object)* - custom error response error
 
 ```javascript
 // in app/routes.js
