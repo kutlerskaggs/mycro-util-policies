@@ -73,6 +73,35 @@ module.exports = function(mycro) {
                 }
             },
             '/not': {
+                '/custom': {
+                    '/1': {
+                        policies: [
+                            mycro.policies.not(
+                                mycro.policies.validate('query', function(joi) {
+                                    return joi.object({
+                                        name: joi.string().required()
+                                    }).required();
+                                }), 400, 'Bad Request'
+                            )
+                        ],
+                        get: 'test.success'
+                    },
+                    '/2': {
+                        policies: [
+                            mycro.policies.not(
+                                mycro.policies.validate('query', function(joi) {
+                                    return joi.object({
+                                        name: joi.string().required()
+                                    }).required();
+                                }), {
+                                    status: 401,
+                                    error: 'Unauthorized'
+                                }
+                            )
+                        ],
+                        get: 'test.success'
+                    }
+                },
                 '/one': {
                     policies: [
                         mycro.policies.not(
@@ -98,7 +127,13 @@ module.exports = function(mycro) {
                             return joi.object({
                                 name: joi.string().required()
                             }).required();
-                        }, {allowUnknown: true})
+                        }, {allowUnknown: true}),
+                        {
+                            error: {
+                                status: 400,
+                                error: 'Bad Request'
+                            }
+                        }
                     )
                 ],
                 get: 'test.success'
@@ -139,6 +174,22 @@ module.exports = function(mycro) {
                         }, {allowUnknown: true})
                     ],
                     get: 'validate.cookies'
+                },
+                '/custom': {
+                    policies: [
+                        mycro.policies.validate('headers', function(joi) {
+                            return joi.object({
+                                authorization: joi.string().regex(/^Bearer .+/g).required()
+                            }).required();
+                        }, {
+                            allowUnknown: true,
+                            error: {
+                                status: 401,
+                                error: 'Unauthorized'
+                            }
+                        })
+                    ],
+                    get: 'validate.all'
                 },
                 '/headers': {
                     policies: [

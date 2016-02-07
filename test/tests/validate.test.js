@@ -120,4 +120,28 @@ describe('[policy] validate', function() {
             }
         ], done);
     });
+
+    it('should allow for custom error handling', function(done) {
+        async.parallel([
+            function(fn) {
+                request.get('/validate/custom')
+                    .expect(401)
+                    .end(fn);
+            },
+
+            function(fn) {
+                request.get('/validate/custom')
+                    .set('Authorization', 'Basic laksdjf;laksdf')
+                    .expect(401)
+                    .end(fn);
+            },
+
+            function(fn) {
+                request.get('/validate/custom')
+                    .set('Authorization', 'Bearer ey193ocsdijcwaj')
+                    .expect(200)
+                    .end(fn);
+            }
+        ], done);
+    });
 });
