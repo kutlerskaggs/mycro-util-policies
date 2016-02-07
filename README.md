@@ -163,5 +163,5 @@ grunt coverage
 
 
 ## License
-Copyright (c) 2016 Chris Ludden.
+Copyright (c) 2016 Kutler Skaggs, Inc.
 Licensed under the [MIT license](LICENSE.md).
