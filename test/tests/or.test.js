@@ -26,7 +26,7 @@ describe('[policy] or', function() {
 
             function(fn) {
                 request.get('/or?')
-                    .expect(403)
+                    .expect(400)
                     .end(fn);
             }
         ], done);
